@@ -7,5 +7,8 @@ class FileReader
   def initialize(filename)
     file = File.open(filename)
     @data = file.readlines.map(&:chomp)
+
+  rescue
+    @data = "File doesn't exist"
   end
 end
