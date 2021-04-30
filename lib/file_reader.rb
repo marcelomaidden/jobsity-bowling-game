@@ -6,14 +6,21 @@ class FileReader
 
   def initialize(filename)
     @data = {}
-    file = File.open(filename)
-    @lines = file.readlines.map(&:chomp)
-    process_points
+    @error = 'Wrong file extension' unless is_valid?(filename)
+    if is_valid?(filename)
+      file = File.open(filename)
+      @lines = file.readlines.map(&:chomp)
+      process_points
+    end
   rescue Errno::ENOENT
     @error = "File can't be read"
   end
 
   private
+
+  def is_valid?(filename)
+    File.extname(filename) == '.txt'
+  end
 
   def process_points
     @lines.each do |line|
