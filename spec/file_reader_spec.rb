@@ -9,6 +9,6 @@ RSpec.describe 'Reads file' do
   end
 
   it "Returns an error message when the file doesn't exist" do
-    expect(file2.data).to eq("File doesn't exist")
+    expect(file2.error).to eq("File can't be read")
   end
 end
