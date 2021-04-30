@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../lib/file_reader'
 
 RSpec.describe 'File reader' do
@@ -20,4 +22,3 @@ RSpec.describe 'File reader' do
     expect(wrong_extension.error).to eq('Wrong file extension')
   end
 end
-
