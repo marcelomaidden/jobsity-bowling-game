@@ -6,8 +6,8 @@ class FileReader
 
   def initialize(filename)
     @data = {}
-    @error = 'Wrong file extension' unless is_valid?(filename)
-    if is_valid?(filename)
+    @error = 'Wrong file extension' unless valid?(filename)
+    if valid?(filename)
       file = File.open(filename)
       @lines = file.readlines.map(&:chomp)
       process_points
@@ -18,7 +18,7 @@ class FileReader
 
   private
 
-  def is_valid?(filename)
+  def valid?(filename)
     File.extname(filename) == '.txt'
   end
 
