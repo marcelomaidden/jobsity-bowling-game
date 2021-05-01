@@ -1,4 +1,7 @@
+# Score class is used to calculate the player score based on pinfalls
 class Score
+  attr_reader :frames, :total, :player
+
   def initialize(player, pinfalls)
     @player = player
     @pinfalls = pinfalls
@@ -6,7 +9,6 @@ class Score
     @total = []
     create_frames
     create_scores
-    puts @total.join('  ')
   end
 
   private
