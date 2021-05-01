@@ -42,10 +42,10 @@ end
 class FileReader
   attr_reader :data
 
-  def initialize(filename)
+  def initialize(filename, extension)
     @data = {}
     @filename = filename
-    @validator = FileValidator.new(filename, '.txt')
+    @validator = FileValidator.new(filename, extension)
     process_output if @validator.check_file
   end
 
