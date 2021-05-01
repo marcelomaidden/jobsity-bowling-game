@@ -1,5 +1,7 @@
+# Pinfalls class receive an array and groups the pinfalls
 class Pinfalls
   attr_reader :data
+
   def initialize(pinfalls)
     @data = pinfalls
     group_pinfalls
