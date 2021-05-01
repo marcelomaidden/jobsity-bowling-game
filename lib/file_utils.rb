@@ -13,6 +13,8 @@ class FileValidator
     end
   rescue Errno::ENOENT
     @error = "File can't be read"
+  rescue TypeError
+    @error = 'Please, provide a valid file name'
   end
 
   def check_file
@@ -28,6 +30,8 @@ class FileValidator
     end
     @error = 'Invalid file' if result == false
     result
+  rescue TypeError
+    @error = 'Please, provide a valid file name'
   end
 
   private
@@ -44,6 +48,8 @@ class FileValidator
     valid = File.extname(@filename) == @extension
     @error = 'Wrong file extension' unless valid
     valid
+  rescue TypeError
+    @error = 'Please, provide a valid file name'
   end
 end
 

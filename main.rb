@@ -3,15 +3,11 @@
 require_relative 'lib/file_utils'
 require_relative 'lib/score'
 require_relative 'lib/game'
+file = FileReader.new(ARGV[0], '.txt', FileValidator)
 
-if ARGV[0]
-  file = FileReader.new(ARGV[0], '.txt', FileValidator)
-  if file.validator.error
-    puts file.validator.error
-  else
-    game = Game.new(file.data, Score)
-    game.output
-  end
+if file.validator.error
+  puts file.validator.error
 else
-  puts 'Please, provide the file name that contains the game data'
+  game = Game.new(file.data, Score)
+  game.output
 end
