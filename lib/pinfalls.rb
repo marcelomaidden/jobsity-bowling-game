@@ -11,11 +11,11 @@ class Pinfalls
     grouped = []
     until @data.empty?
       grouped.push([@data.shift]) if @data[0] == '10'
-      unless @data[0] == '10'
-        group = []
-        2.times { group.push(@data.shift) }
-        grouped.push(group)
-      end
+      next if @data[0] == '10'
+
+      group = []
+      2.times { group.push(@data.shift) }
+      grouped.push(group)
     end
     @data = grouped
   end
