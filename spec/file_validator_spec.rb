@@ -12,7 +12,8 @@ RSpec.describe 'File validator' do
     expect(file2.error).to eq("File can't be read")
   end
   it 'Validates if the file is empty' do
-    expect(empty.check_file).to be(false)
+    empty.check_file
+    expect(empty.error).to be('Empty file')
   end
   it 'Returns an error when extension is not txt' do
     expect(wrong_extension.error).to eq('Wrong file extension')
