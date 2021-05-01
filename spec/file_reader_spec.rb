@@ -5,8 +5,9 @@ require_relative '../lib/file_reader'
 RSpec.describe 'File reader' do
   let(:file) { FileReader.new('assets/game.txt') }
   let(:file2) { FileReader.new('assets/game2.txt') }
-  let(:empty) { FileReader.new('empty.txt') }
-  let(:wrong_extension) { FileReader.new('file.html') }
+  let(:empty) { FileReader.new('spec/empty.txt') }
+  let(:wrong_extension) { FileReader.new('spec/file.html') }
+  let(:wrong_structure) { FileReader.new('spec/structure.txt') }
 
   it "Returns an error message when the file doesn't exist" do
     expect(file2.error).to eq("File can't be read")
@@ -16,9 +17,13 @@ RSpec.describe 'File reader' do
   end
   it 'Returns an empty Hash if the file is empty' do
     expect(empty.data).to be_instance_of(Hash)
+    expect(empty.check_file).to be(false)
   end
   it 'Returns an empty Hash and an error when extension is not txt' do
     expect(wrong_extension.data).to be_instance_of(Hash)
     expect(wrong_extension.error).to eq('Wrong file extension')
+  end
+  it 'Checks the file structure' do
+    expect(wrong_structure.check_file).to be(false)
   end
 end

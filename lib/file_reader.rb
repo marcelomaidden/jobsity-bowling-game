@@ -6,8 +6,9 @@ class FileReader
 
   def initialize(filename)
     @data = {}
-    @error = 'Wrong file extension' unless valid?(filename)
-    if valid?(filename)
+    @filename = filename
+    @error = 'Wrong file extension' unless valid_extension?
+    if valid_extension?
       file = File.open(filename)
       @lines = file.readlines.map(&:chomp)
       process_points
@@ -16,10 +17,24 @@ class FileReader
     @error = "File can't be read"
   end
 
+  def check_file
+    return false unless valid_extension?
+    return false unless @error.nil?
+    return false if @data.empty?
+
+    result = true
+    @lines.each do |line|
+      info = line.split(' ')
+      result &&= info.length == 2
+      result &&= info[0].split.all?(/[a-zA-Z]/)
+    end
+    result
+  end
+
   private
 
-  def valid?(filename)
-    File.extname(filename) == '.txt'
+  def valid_extension?
+    File.extname(@filename) == '.txt'
   end
 
   def process_points
