@@ -18,7 +18,7 @@ class FileValidator
   def check_file
     return false unless valid_extension?
     return false unless @error.nil?
-    return false if @lines.empty?
+    return false if empty?
 
     result = true
     @lines.each do |line|
@@ -26,10 +26,19 @@ class FileValidator
       result &&= info.length == 2
       result &&= info[0].split.all?(/[a-zA-Z]/)
     end
+    @error = 'Invalid file' if result == false
     result
   end
 
   private
+
+  def empty?
+    if @lines.empty?
+      @error = 'Empty file'
+      return true
+    end
+    false
+  end
 
   def valid_extension?
     valid = File.extname(@filename) == @extension
