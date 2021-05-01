@@ -3,13 +3,13 @@ class Score
     @player = player
     @pinfalls = pinfalls
     @frames = []
-    calculate_frames
+    create_frames
     p @frames
   end
 
   private
 
-  def calculate_frames
+  def create_frames
     until @pinfalls.empty?
       if @pinfalls[0] == '10'
         @frames.push([@pinfalls.shift])
