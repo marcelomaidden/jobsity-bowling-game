@@ -3,7 +3,7 @@
 require_relative 'lib/file_utils'
 require_relative 'lib/score'
 
-file = FileReader.new(ARGV[0], '.txt')
+file = FileReader.new(ARGV[0], '.txt', FileValidator)
 if file.validator.error
   puts file.validator.error
 else
