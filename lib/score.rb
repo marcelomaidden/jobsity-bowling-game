@@ -6,14 +6,13 @@ class Score
     @player = player
     @pinfalls = pinfalls
     @total = []
-    group_pinfalls
     create_scores
   end
 
   private
 
   def strike?(index)
-    return true if @pinfalls[index].length == 1 && @pinfalls[index][0].to_i == 10
+    return true if @pinfalls.data[index].length == 1 && @pinfalls.data[index][0].to_i == 10
 
     false
   end
@@ -21,8 +20,8 @@ class Score
   def strike(index)
     total = 10
     total += @total[index - 1] if index.positive?
-    if @pinfalls[index + 1].length > 1
-      @pinfalls[index + 1].each do |pinfalls|
+    if @pinfalls.data[index + 1].length > 1
+      @pinfalls.data[index + 1].each do |pinfalls|
         total += pinfalls.to_i
       end
       return total
@@ -30,12 +29,12 @@ class Score
     total += 10 if strike?(index + 1)
     return total += 10 if strike?(index + 2)
 
-    total += @pinfalls[index + 2][0].to_i
+    total += @pinfalls.data[index + 2][0].to_i
   end
 
   def spare?(index)
     total = 0
-    @pinfalls[index].each do |pinfalls|
+    @pinfalls.data[index].each do |pinfalls|
       total += pinfalls.to_i
     end
     return true if total == 10
@@ -45,17 +44,17 @@ class Score
 
   def spare(index)
     total = 0
-    @pinfalls[index].each do |pinfalls|
+    @pinfalls.data[index].each do |pinfalls|
       total += pinfalls.to_i
     end
-    total += @pinfalls[index + 1][0].to_i if (index + 1) < 10
+    total += @pinfalls.data[index + 1][0].to_i if (index + 1) < 10
     total += @total[index - 1] if index.positive?
     total
   end
 
   def normal(index)
     total = 0
-    @pinfalls[index].each do |pinfalls|
+    @pinfalls.data[index].each do |pinfalls|
       total += pinfalls.to_i
     end
     total += @total[index - 1] if index.positive?
@@ -70,24 +69,11 @@ class Score
         index += 1
         next
       end
-      if @pinfalls[index].length == 2
+      if @pinfalls.data[index].length == 2
         @total[index] = spare(index) if spare?(index)
         @total[index] = normal(index) unless spare?(index)
       end
       index += 1
     end
-  end
-
-  def group_pinfalls
-    grouped = []
-    until @pinfalls.empty?
-      grouped.push([@pinfalls.shift]) if @pinfalls[0] == '10'
-      unless @pinfalls[0] == '10'
-        group = []
-        2.times { group.push(@pinfalls.shift) }
-        grouped.push(group)
-      end
-    end
-    @pinfalls = grouped
   end
 end
