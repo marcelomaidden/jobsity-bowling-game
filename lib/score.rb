@@ -1,20 +1,19 @@
 # Score class is used to calculate the player score based on pinfalls
 class Score
-  attr_reader :frames, :total, :player
+  attr_reader :pinfalls, :total, :player
 
   def initialize(player, pinfalls)
     @player = player
     @pinfalls = pinfalls
-    @frames = []
     @total = []
-    create_frames
+    group_pinfalls
     create_scores
   end
 
   private
 
   def strike?(index)
-    return true if @frames[index].length == 1 && @frames[index][0].to_i == 10
+    return true if @pinfalls[index].length == 1 && @pinfalls[index][0].to_i == 10
 
     false
   end
@@ -22,8 +21,8 @@ class Score
   def strike(index)
     total = 10
     total += @total[index - 1] if index.positive?
-    if @frames[index + 1].length > 1
-      @frames[index + 1].each do |pinfalls|
+    if @pinfalls[index + 1].length > 1
+      @pinfalls[index + 1].each do |pinfalls|
         total += pinfalls.to_i
       end
       return total
@@ -31,12 +30,12 @@ class Score
     total += 10 if strike?(index + 1)
     return total += 10 if strike?(index + 2)
 
-    total += @frames[index + 2][0].to_i
+    total += @pinfalls[index + 2][0].to_i
   end
 
   def spare?(index)
     total = 0
-    @frames[index].each do |pinfalls|
+    @pinfalls[index].each do |pinfalls|
       total += pinfalls.to_i
     end
     return true if total == 10
@@ -46,17 +45,17 @@ class Score
 
   def spare(index)
     total = 0
-    @frames[index].each do |pinfalls|
+    @pinfalls[index].each do |pinfalls|
       total += pinfalls.to_i
     end
-    total += @frames[index + 1][0].to_i if (index + 1) < 10
+    total += @pinfalls[index + 1][0].to_i if (index + 1) < 10
     total += @total[index - 1] if index.positive?
     total
   end
 
   def normal(index)
     total = 0
-    @frames[index].each do |pinfalls|
+    @pinfalls[index].each do |pinfalls|
       total += pinfalls.to_i
     end
     total += @total[index - 1] if index.positive?
@@ -71,7 +70,7 @@ class Score
         index += 1
         next
       end
-      if @frames[index].length == 2
+      if @pinfalls[index].length == 2
         @total[index] = spare(index) if spare?(index)
         @total[index] = normal(index) unless spare?(index)
       end
@@ -79,15 +78,16 @@ class Score
     end
   end
 
-  def create_frames
+  def group_pinfalls
+    grouped = []
     until @pinfalls.empty?
-      if @pinfalls[0] == '10'
-        @frames.push([@pinfalls.shift])
-      else
-        frame = []
-        2.times { frame.push(@pinfalls.shift) }
-        @frames.push(frame)
+      grouped.push([@pinfalls.shift]) if @pinfalls[0] == '10'
+      unless @pinfalls[0] == '10'
+        group = []
+        2.times { group.push(@pinfalls.shift) }
+        grouped.push(group)
       end
     end
+    @pinfalls = grouped
   end
 end

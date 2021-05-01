@@ -9,7 +9,7 @@ class Game
     @data.each_key do |player|
       player_score = @score.new(player, @data[player])
       puts player_score.player
-      puts "Pinfalls #{player_score.frames.join("  ")}"
+      puts "Pinfalls #{player_score.pinfalls.join("  ")}"
       puts "Score #{player_score.total.join("\t")}"
     end
   end
