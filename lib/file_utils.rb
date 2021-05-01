@@ -40,7 +40,7 @@ end
 
 # FileReader reads game file and stores player names and points in a Hash
 class FileReader
-  attr_reader :data
+  attr_reader :data, :validator
 
   def initialize(filename, extension)
     @data = {}
@@ -56,11 +56,11 @@ class FileReader
     @lines = file.readlines.map(&:chomp)
 
     @lines.each do |line|
-      user_throws = line.split(' ')
-      if @data[user_throws[0]]
-        @data[user_throws[0]].push(user_throws[1])
+      player_throws = line.split(' ')
+      if @data[player_throws[0]]
+        @data[player_throws[0]].push(player_throws[1])
       else
-        @data[user_throws[0]] = [user_throws[1]]
+        @data[player_throws[0]] = [player_throws[1]]
       end
     end
   end
