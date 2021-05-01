@@ -1,17 +1,15 @@
 # frozen_string_literal: true
 
-# FileReader reads game file and stores player names and points in an array
-class FileReader
-  attr_reader :error, :data
+# FileValidator validates the file checking extension and file structure
+class FileValidator
+  attr_reader :error
 
-  def initialize(filename)
-    @data = {}
+  def initialize(filename, extension)
     @filename = filename
-    @error = 'Wrong file extension' unless valid_extension?
+    @extension = extension
     if valid_extension?
       file = File.open(filename)
       @lines = file.readlines.map(&:chomp)
-      process_points
     end
   rescue Errno::ENOENT
     @error = "File can't be read"
@@ -20,7 +18,7 @@ class FileReader
   def check_file
     return false unless valid_extension?
     return false unless @error.nil?
-    return false if @data.empty?
+    return false if @lines.empty?
 
     result = true
     @lines.each do |line|
@@ -34,10 +32,29 @@ class FileReader
   private
 
   def valid_extension?
-    File.extname(@filename) == '.txt'
+    valid = File.extname(@filename) == @extension
+    @error = 'Wrong file extension' unless valid
+    valid
+  end
+end
+
+# FileReader reads game file and stores player names and points in a Hash
+class FileReader
+  attr_reader :data
+
+  def initialize(filename)
+    @data = {}
+    @filename = filename
+    @validator = FileValidator.new(filename, '.txt')
+    process_output if @validator.check_file
   end
 
-  def process_points
+  private
+
+  def process_output
+    file = File.open(@filename)
+    @lines = file.readlines.map(&:chomp)
+
     @lines.each do |line|
       user_throws = line.split(' ')
       if @data[user_throws[0]]
