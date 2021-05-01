@@ -12,4 +12,6 @@ if ARGV[0]
     game = Game.new(file.data, Score)
     game.output
   end
+else
+  puts 'Please, provide the file name that contains the game data'
 end
