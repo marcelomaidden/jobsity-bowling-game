@@ -9,6 +9,15 @@ class Score
     create_scores
   end
 
+  def valid?
+    return false if @pinfalls.data.length > 12
+    return false if pinfalls.data.length > 10 &&
+                    @pinfalls.data[9][0] != '10'
+    return false if @total.any?(&:negative?)
+
+    true
+  end
+
   private
 
   def strike?(index)

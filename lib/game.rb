@@ -13,6 +13,8 @@ class Game
       t.add_separator
       @data.each_key do |player|
         player_score = @score.new(player, @pinfalls.new(@data[player]))
+        next unless player_score.valid?
+
         t.add_row([player_score.player])
         t.add_separator
         t.add_row(['Pinfalls'].concat(player_score.pinfalls.formatted))

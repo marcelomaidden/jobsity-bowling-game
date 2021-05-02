@@ -16,6 +16,7 @@ class Pinfalls
       @formatted.push(['', 'X'].join(' | ')) if @data[0] == '10'
       grouped.push([@data.shift]) if @data[0] == '10'
       next if @data[0] == '10'
+      next if @data.empty?
 
       group = []
       total = 0
