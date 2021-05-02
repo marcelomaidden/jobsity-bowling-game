@@ -1,15 +1,13 @@
-# Bowling app
-
 <h1 align="center">Bowling app</h1>
 
-## about-bowling-game
+## about bowling game
 Bowling app is a game that reads a file with the player's pinfalls and calculates the total score for it. When the player hits a strike it sums the next two points to the total. When the player hits a spare it sums the next point to the total.
 Built with Ruby and tested with RSpec. The output was formatted using terminal-table gem package.
 <hr>
 
 ![screenshot](./screenshot.png)
 
-## about-the-project
+## about the project
 The game has a basic interface that runs in the terminal.
 
 The goals of this project are:
@@ -41,11 +39,11 @@ Finally install the necessary packages by typing the command below:
 
   `bundle install`
 
-## run-bowling-game
+## run bowling game
 You will need to execute the main file located inside the root folder inside the project. 
 `ruby main.rb`
 
-## how-to-test
+## how to test
 
 In order to test our project type the command below:
 
