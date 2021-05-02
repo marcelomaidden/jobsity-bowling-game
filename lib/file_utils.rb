@@ -23,11 +23,14 @@ class FileValidator
     return false if empty?
 
     result = true
+    values = []
     @lines.each do |line|
       info = line.split(' ')
       result &&= info.length == 2
       result &&= info[0].split.all?(/[a-zA-Z]/)
+      values.push(info[1])
     end
+    result &&= (values.all?('0') || values.all?('F')) && values.length >= 10
     @error = 'Invalid file' if result == false
     result
   rescue TypeError

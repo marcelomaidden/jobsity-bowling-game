@@ -14,6 +14,7 @@ class Score
     return false if pinfalls.data.length > 10 &&
                     @pinfalls.data[9][0] != '10'
     return false if @total.any?(&:negative?)
+    return false if @pinfalls.data.length < 10
 
     true
   end
@@ -72,6 +73,7 @@ class Score
 
   def create_scores
     index = 0
+
     while index < 10
       if strike?(index)
         @total[index] = strike(index)
