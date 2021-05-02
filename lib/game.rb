@@ -17,7 +17,7 @@ class Game
       @data.each_key do |player|
         player_score = @score.new(player, @pinfalls.new(@data[player]))
         if player_score.error
-          puts player_score.error
+          puts Rainbow(player_score.error).red
         else
           t.add_row([Rainbow(player_score.player).blue.bright])
           t.add_separator

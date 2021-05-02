@@ -31,7 +31,9 @@ class Score
   end
 
   def invalid?(total)
-    total == 'invalid' || total > 10
+    result = total == 'invalid' || total > 10
+    @error = "Invalid score for #{@player}" if result
+    result
   end
 
   def strike(index)
@@ -100,8 +102,17 @@ class Score
     total
   end
 
+  def invalid_score?
+    return true if @pinfalls.data.length > 12
+    return true if @pinfalls.data.length > 10 && @pinfalls.data[9][0] != '10'
+
+    false
+  end
+
   def create_scores
     index = 0
+    return @error = "Invalid score for #{@player}" if invalid_score?
+
     while index < 10
       if strike?(index)
         @total[index] = strike(index)
