@@ -1,6 +1,6 @@
 # Pinfalls class receive an array and groups the pinfalls
 class Pinfalls
-  attr_reader :data
+  attr_reader :data, :formatted
 
   def initialize(pinfalls)
     @data = pinfalls
@@ -11,13 +11,22 @@ class Pinfalls
 
   def group_pinfalls
     grouped = []
+    @formatted = []
     until @data.empty?
+      @formatted.push(['', 'X'].join(' | ')) if @data[0] == '10'
       grouped.push([@data.shift]) if @data[0] == '10'
       next if @data[0] == '10'
 
       group = []
-      2.times { group.push(@data.shift) }
+      total = 0
+      2.times do
+        value = @data.shift
+        total += value.to_i
+        group.push(value)
+      end
       grouped.push(group)
+      @formatted.push([group[0], '/'].join(' | ')) if total == 10
+      @formatted.push(group.join(' | ')) unless total == 10
     end
     @data = grouped
   end
