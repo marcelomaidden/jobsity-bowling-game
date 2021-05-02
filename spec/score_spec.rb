@@ -4,7 +4,7 @@ require_relative '../lib/pinfalls'
 require_relative '../lib/score'
 
 RSpec.describe 'Score class' do
-  let(:perfect) { Pinfalls.new(['10', '10','10','10','10','10','10','10','10','10', '10', '10']) }
+  let(:perfect) { Pinfalls.new(%w[10 10 10 10 10 10 10 10 10 10 10 10]) }
 
   it 'Calculates the perfect score' do
     score = Score.new('Marcelo', perfect)

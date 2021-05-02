@@ -8,7 +8,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 gem 'rspec', '~> 3.10'
 
-gem "terminal-table", "~> 3.0"
+gem 'terminal-table', '~> 3.0'
 
-gem "gem", "~> 0.0.1.alpha"
-gem "rainbow", "~> 3.0"
+gem 'gem', '~> 0.0.1.alpha'
+gem 'rainbow', '~> 3.0'

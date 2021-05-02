@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Pinfalls class receive an array and groups the pinfalls
 class Pinfalls
   attr_reader :data, :formatted

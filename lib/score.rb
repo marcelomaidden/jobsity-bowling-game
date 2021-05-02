@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Score class is used to calculate the player score based on pinfalls
 class Score
   attr_reader :pinfalls, :total, :player

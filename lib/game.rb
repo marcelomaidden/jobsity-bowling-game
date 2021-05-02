@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'terminal-table'
 require 'rainbow'
 
@@ -10,7 +12,7 @@ class Game
 
   def output
     table = Terminal::Table.new do |t|
-      t.add_row([Rainbow('Frame').red, 1,2,3,4,5,6,7,8,9,10])
+      t.add_row([Rainbow('Frame').red, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
       t.add_separator
       @data.each_key do |player|
         player_score = @score.new(player, @pinfalls.new(@data[player]))

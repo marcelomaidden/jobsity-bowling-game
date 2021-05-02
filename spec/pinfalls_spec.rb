@@ -3,7 +3,7 @@
 require_relative '../lib/pinfalls'
 
 RSpec.describe 'Pinfalls class' do
-  let(:pinfalls) { Pinfalls.new(['10', '10','10','10','10','10','10','10','10','10']) }
+  let(:pinfalls) { Pinfalls.new(%w[10 10 10 10 10 10 10 10 10 10]) }
 
   it 'Returns an Array after processing' do
     expect(pinfalls.data).to be_instance_of(Array)
