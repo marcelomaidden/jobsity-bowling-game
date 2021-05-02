@@ -16,14 +16,16 @@ class Game
       t.add_separator
       @data.each_key do |player|
         player_score = @score.new(player, @pinfalls.new(@data[player]))
-        next unless player_score.valid?
-
-        t.add_row([Rainbow(player_score.player).blue.bright])
-        t.add_separator
-        t.add_row([Rainbow('Pinfalls').cyan].concat(player_score.pinfalls.formatted))
-        t.add_separator
-        t.add_row([Rainbow('Score').yellow].concat(player_score.total))
-        t.add_separator
+        if player_score.error
+          puts player_score.error
+        else
+          t.add_row([Rainbow(player_score.player).blue.bright])
+          t.add_separator
+          t.add_row([Rainbow('Pinfalls').cyan].concat(player_score.pinfalls.formatted))
+          t.add_separator
+          t.add_row([Rainbow('Score').yellow].concat(player_score.total))
+          t.add_separator
+        end
       end
     end
     puts table

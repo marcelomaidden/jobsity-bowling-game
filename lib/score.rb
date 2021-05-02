@@ -2,7 +2,7 @@
 
 # Score class is used to calculate the player score based on pinfalls
 class Score
-  attr_reader :pinfalls, :total, :player
+  attr_reader :pinfalls, :total, :player, :error
 
   def initialize(player, pinfalls)
     @player = player
@@ -12,6 +12,7 @@ class Score
   end
 
   def valid?
+    return false if @total.any?('invalid')
     return false if @pinfalls.data.length > 12
     return false if pinfalls.data.length > 10 &&
                     @pinfalls.data[9][0] != '10'
@@ -29,14 +30,24 @@ class Score
     false
   end
 
+  def invalid?(total)
+    total == 'invalid' || total > 10
+  end
+
   def strike(index)
     total = 10
-    total += @total[index - 1] if index.positive?
+    total += @total[index - 1] if index.positive? && valid_score?(index)
     if @pinfalls.data[index + 1].length > 1
+      subtotal = 0
       @pinfalls.data[index + 1].each do |pinfalls|
-        total += pinfalls.to_i
+        subtotal == 'invalid' if pinfalls.to_i.negative?
+        break if subtotal == 'invalid'
+
+        subtotal += pinfalls.to_i
       end
-      return total
+      return 'invalid' if invalid?(subtotal)
+
+      return total += subtotal
     end
     total += 10 if strike?(index + 1)
     return total += 10 if strike?(index + 2)
@@ -54,28 +65,43 @@ class Score
     false
   end
 
+  def valid_score?(index)
+    return false if @total[index - 1] == 'invalid'
+
+    true
+  end
+
   def spare(index)
     total = 0
     @pinfalls.data[index].each do |pinfalls|
+      total = 'invalid' if pinfalls.to_i.negative?
+      return 'invalid' if invalid?(total)
+
       total += pinfalls.to_i
     end
+    return 'invalid' if invalid?(total)
+
     total += @pinfalls.data[index + 1][0].to_i if (index + 1) < 10
-    total += @total[index - 1] if index.positive?
+    total += @total[index - 1] if index.positive? && valid_score?(index)
     total
   end
 
   def normal(index)
     total = 0
     @pinfalls.data[index].each do |pinfalls|
+      total = 'invalid' if pinfalls.to_i.negative?
+      return 'invalid' if invalid?(total)
+
       total += pinfalls.to_i
     end
-    total += @total[index - 1] if index.positive?
+    return 'invalid' if invalid?(total)
+
+    total += @total[index - 1] if index.positive? && valid_score?(index)
     total
   end
 
   def create_scores
     index = 0
-
     while index < 10
       if strike?(index)
         @total[index] = strike(index)
@@ -88,5 +114,8 @@ class Score
       end
       index += 1
     end
+  rescue NoMethodError
+    @error = "Invalid score for #{@player}"
   end
 end
+
