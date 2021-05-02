@@ -25,11 +25,13 @@ To get a local copy up and running follow these simple example steps.
 Computer running Mac OS, Windows, or Linux Ubuntu.
 Internet browser: Firefox, Google Chrome, Opera...
 
-Have Ruby installed you can see this link for more detailed instructions [Install Ruby](https://www.theodinproject.com/courses/web-development-101/lessons/installing-ruby)
+Have Ruby installed you can see this link for more detailed instructions [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/)
 
 ### installation
 
-You MUST have Ruby installed in your system. If you don't have it installed you can go this page [Install Ruby](https://www.theodinproject.com/courses/web-development-101/lessons/installing-ruby)
+You MUST have Ruby installed in your system. If you don't have it installed you can go this page [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+
+You should have Git installed. [Install Git](https://git-scm.com/downloads)
 
 After installing ruby, you can download the repo or clone it (paste on the terminal) 
 `git clone git@github.com:marcelomaidden/jobsity-bowling-game.git`
