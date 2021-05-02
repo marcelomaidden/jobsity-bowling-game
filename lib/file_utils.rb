@@ -72,7 +72,7 @@ class FileReader
     @lines = file.readlines.map(&:chomp)
 
     @lines.each do |line|
-      player_throws = line.split(' ')
+      player_throws = line.split('  ')
       if @data[player_throws[0]]
         @data[player_throws[0]].push(player_throws[1])
       else
