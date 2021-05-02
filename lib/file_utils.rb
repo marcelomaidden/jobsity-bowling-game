@@ -30,8 +30,7 @@ class FileValidator
       result &&= info[0].split.all?(/[a-zA-Z]/)
       values.push(info[1])
     end
-    result &&= (values.all?('0') || values.all?('F')) && values.length >= 10
-    @error = 'Invalid file' if result == false
+
     result
   rescue TypeError
     @error = 'Please, provide a valid file name'
