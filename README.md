@@ -33,14 +33,13 @@ Have Ruby installed you can see this link for more detailed instructions [Instal
 
 You MUST have Ruby installed in your system. If you don't have it installed you can go this page [Install Ruby](https://www.theodinproject.com/courses/web-development-101/lessons/installing-ruby)
 
-After that install the necessary packages by typing the command below:
-
-  `bundle install`
-
 After installing ruby, you can download the repo or clone it (paste on the terminal) 
 `git clone git@github.com:marcelomaidden/jobsity-bowling-game.git`
 then change to the project directory 
 `cd jobsity-bowling-game`
+Finally install the necessary packages by typing the command below:
+
+  `bundle install`
 
 ## run-bowling-game
 You will need to execute the main file located inside the root folder inside the project. 
