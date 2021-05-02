@@ -2,7 +2,7 @@
 
 require 'terminal-table'
 require 'rainbow'
-
+# Game class is responsible to output the player's score if no score errors
 class Game
   def initialize(data, score, pinfalls)
     @data = data
@@ -31,3 +31,4 @@ class Game
     puts table
   end
 end
+

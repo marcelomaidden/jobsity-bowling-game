@@ -55,6 +55,7 @@ class Score
     return total += 10 if strike?(index + 2)
 
     total += @pinfalls.data[index + 2][0].to_i
+    total
   end
 
   def spare?(index)
@@ -129,4 +130,3 @@ class Score
     @error = "Invalid score for #{@player}"
   end
 end
-

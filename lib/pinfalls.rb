@@ -34,3 +34,4 @@ class Pinfalls
     @data = grouped
   end
 end
+

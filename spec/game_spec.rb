@@ -1,9 +1,14 @@
 # frozen_string_literal: true
+
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize
+
 require 'rainbow'
 require_relative '../lib/file_utils'
 require_relative '../lib/score'
 require_relative '../lib/game'
 require_relative '../lib/pinfalls'
+
 def two_players_score
   result = "+----------+-------+-------+-------+-------+-------+-------+-------+-------+-------+--------------+\n"
   result += "| #{Rainbow('Frame').red}    | 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10   |\n"
@@ -21,6 +26,7 @@ def two_players_score
   result += "| #{Rainbow('Score').yellow}    | 16    | 25    | 44    | 53    | 82    | 101   | 110   | 124   | 132   | 151  |\n"
   result += "+----------+-------+-------+-------+-------+-------+-------+-------+-------+-------+--------------+\n"
   result += "+----------+--------------------------------------------------------------------------------------+\n"
+  result
 end
 
 def zero_score
@@ -34,6 +40,7 @@ def zero_score
   result += "| #{Rainbow('Score').yellow}    | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     |\n"
   result += "+----------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+\n"
   result += "+----------+-------------------------------------------------------------------------------+\n"
+  result
 end
 
 def perfect_score
@@ -47,6 +54,7 @@ def perfect_score
   result += "| #{Rainbow('Score').yellow}    | 30   | 60   | 90   | 120  | 150  | 180  | 210  | 240  | 270  | 300  |\n"
   result += "+----------+------+------+------+------+------+------+------+------+------+--------------------+\n"
   result += "+----------+-----------------------------------------------------------------------------------+\n"
+  result
 end
 
 RSpec.describe 'Game integration tests' do
@@ -69,3 +77,6 @@ RSpec.describe 'Game integration tests' do
     expect { perfect_result.output }.to output(perfect_score).to_stdout
   end
 end
+
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize
