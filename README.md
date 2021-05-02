@@ -65,7 +65,7 @@ In order to test our project type the command below:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](/issues).
+Feel free to check the [issues page](https://github.com/marcelomaidden/jobsity-bowling-game/issues).
 
 ## show-your-support
 
