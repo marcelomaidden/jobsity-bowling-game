@@ -43,7 +43,8 @@ Finally install the necessary packages by typing the command below:
 
 ## run bowling game
 You will need to execute the main file located inside the root folder inside the project. 
-`ruby main.rb`
+An example of file is available inside the assets folder with a basic two player game.
+`ruby main.rb assets/game.txt`
 
 ## how to test
 
