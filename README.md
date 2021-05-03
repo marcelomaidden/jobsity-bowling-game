@@ -24,7 +24,9 @@ To get a local copy up and running follow these simple example steps.
 ## Prerequisites
 Computer running Mac OS, Windows, or Linux Ubuntu.
 
-Have Ruby installed you can see this link for more detailed instructions [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+Have Ruby installed. You can see this link for more detailed instructions [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/).
+
+
 You should have Git installed. [Install Git](https://git-scm.com/downloads)
 
 ### Installation
